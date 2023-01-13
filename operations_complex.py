@@ -154,16 +154,23 @@ def Repeat_Or_No():
         else:
             print('Неверный ответ! Хотите продолжить работу с комплексными числами? (y/n) ')
 
+def CalcComp(num1, num2, operation):
+    if operation == "+":
+        res = Addition(Take_Rational_Part(num1), Take_Symbol(num1), Take_Imaginary_Part(num1), Take_Rational_Part(num2), Take_Symbol(num2), Take_Imaginary_Part(num2))
+    elif operation == "-":
+        res = Deduction(Take_Rational_Part(num1), Take_Symbol(num1), Take_Imaginary_Part(num1), Take_Rational_Part(num2), Take_Symbol(num2), Take_Imaginary_Part(num2))
+    elif operation == "*":
+        res = Multiply(Take_Rational_Part(num1), Take_Symbol(num1), Take_Imaginary_Part(num1), Take_Rational_Part(num2), Take_Symbol(num2), Take_Imaginary_Part(num2))
+    elif operation == "/":
+        res = Division(Take_Rational_Part(num1), Take_Symbol(num1), Take_Imaginary_Part(num1), Take_Rational_Part(num2), Take_Symbol(num2), Take_Imaginary_Part(num2))
+    else:
+        res = [0]
+    record_in_file(res)
+    return res
+
 def mainComp():
     repeat = True
     while repeat == True:
-        operands = Insert_Numbers()
-        if operands[2] == "+":
-            record_in_file(Addition(Take_Rational_Part(operands[0]), Take_Symbol(operands[0]), Take_Imaginary_Part(operands[0]), Take_Rational_Part(operands[1]), Take_Symbol(operands[1]), Take_Imaginary_Part(operands[1])))
-        elif operands[2] == "-":
-            record_in_file(Deduction(Take_Rational_Part(operands[0]), Take_Symbol(operands[0]), Take_Imaginary_Part(operands[0]), Take_Rational_Part(operands[1]), Take_Symbol(operands[1]), Take_Imaginary_Part(operands[1])))
-        elif operands[2] == "*":
-            record_in_file(Multiply(Take_Rational_Part(operands[0]), Take_Symbol(operands[0]), Take_Imaginary_Part(operands[0]), Take_Rational_Part(operands[1]), Take_Symbol(operands[1]), Take_Imaginary_Part(operands[1])))
-        else:
-            record_in_file(Division(Take_Rational_Part(operands[0]), Take_Symbol(operands[0]), Take_Imaginary_Part(operands[0]), Take_Rational_Part(operands[1]), Take_Symbol(operands[1]), Take_Imaginary_Part(operands[1])))
+        num1, num2, op = Insert_Numbers()
+        CalcComp(num1, num2, op)
         repeat = Repeat_Or_No()

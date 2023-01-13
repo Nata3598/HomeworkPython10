@@ -10,14 +10,14 @@ def y():
     return secondnum
 
 def selectoperation():
-    global operation
+    # global operation
     operation = ( input(f'Выберите операцию: +, -, *, /: ') )
     if operation == '+' or '-' or '/' or '*':
         return operation
     else:
-        print('Неверный синтаксис')
+        return ''
 
-def res(firstnum, secondnum):
+def res(firstnum, secondnum, operation):
     if  operation == '+':
         res = firstnum + secondnum
         result = round(res, 3)
@@ -42,7 +42,7 @@ def mainRat():
     while True:
         y = op.y()
         oper = op.selectoperation()
-        res = op.res(x, y)
+        res = op.res(x, y, oper)
         with open('results.txt', 'a') as f:
             f.write(f'{x} {oper} {y} = {res}\n')
             f.close()
